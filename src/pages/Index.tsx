@@ -58,10 +58,10 @@ const Index = () => {
         "Xenova/nllb-200-distilled-600M"
       );
       const result = await translator(text, {
-        sourceLanguage: "eng_Latn",
-        targetLanguage: targetLanguage === "es" ? "spa_Latn" : "fra_Latn",
+        src_lang: "eng_Latn",
+        tgt_lang: targetLanguage === "es" ? "spa_Latn" : "fra_Latn",
       });
-      setTranslatedText(Array.isArray(result) ? result[0].text : result.text);
+      setTranslatedText(Array.isArray(result) ? result[0].translation_text : result.translation_text);
     } catch (error) {
       console.error("Error translating text:", error);
     }
