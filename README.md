@@ -62,7 +62,7 @@ This project is built with .
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/11b0143f-8f90-44b0-8234-46ad301f462d) and click on Share -> Publish.
+Simply open (https://sentiment-translatron.lovable.app/)
 
 ## I want to use a custom domain - is that possible?
 
