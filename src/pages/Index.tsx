@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,6 +21,17 @@ const Index = () => {
   const [targetLanguage, setTargetLanguage] = useState("es");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isTranslating, setIsTranslating] = useState(false);
+
+  // Cleanup function to handle ResizeObserver
+  useEffect(() => {
+    return () => {
+      // Cleanup any potential observers
+      const observers = (window as any).__resizeObservers || [];
+      observers.forEach((observer: any) => {
+        observer.disconnect();
+      });
+    };
+  }, []);
 
   const analyzeSentiment = async () => {
     if (!text) return;
@@ -47,10 +58,10 @@ const Index = () => {
         "Xenova/nllb-200-distilled-600M"
       );
       const result = await translator(text, {
-        src_lang: "eng_Latn",
-        tgt_lang: targetLanguage === "es" ? "spa_Latn" : "fra_Latn",
+        sourceLanguage: "eng_Latn",
+        targetLanguage: targetLanguage === "es" ? "spa_Latn" : "fra_Latn",
       });
-      setTranslatedText(result[0].translation_text);
+      setTranslatedText(Array.isArray(result) ? result[0].text : result.text);
     } catch (error) {
       console.error("Error translating text:", error);
     }
