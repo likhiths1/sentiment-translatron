@@ -58,10 +58,9 @@ const Index = () => {
         "Xenova/nllb-200-distilled-600M"
       );
       const result = await translator(text, {
-        src_lang: "eng_Latn",
         tgt_lang: targetLanguage === "es" ? "spa_Latn" : "fra_Latn",
       });
-      setTranslatedText(Array.isArray(result) ? result[0].translation_text : result.translation_text);
+      setTranslatedText(result.translation_text);
     } catch (error) {
       console.error("Error translating text:", error);
     }
@@ -76,20 +75,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto space-y-8">
-        <div className="text-center space-y-2">
+    <div className="bg-gradient-to-b from-gray-50 to-gray-100">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+        {/* Hero Section */}
+        <div className="text-center space-y-4">
           <Badge className="bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">
-            Analysis Tool
+            AI-Powered Analysis
           </Badge>
           <h1 className="text-4xl font-light tracking-tight text-gray-900">
             Sentiment & Translation
           </h1>
-          <p className="text-gray-500">
-            Analyze sentiment and translate text with advanced AI
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            Analyze sentiment and translate text with advanced AI models. Our tool combines
+            natural language processing with machine translation to help you understand
+            both the emotional tone and meaning across languages.
           </p>
         </div>
 
+        {/* Main Tool Section */}
         <Card className="p-6 bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100">
           <div className="space-y-4">
             <Textarea
@@ -131,6 +134,7 @@ const Index = () => {
           </div>
         </Card>
 
+        {/* Results Section */}
         {(sentiment || translatedText) && (
           <div className="grid gap-6 md:grid-cols-2">
             {sentiment && (
@@ -159,6 +163,69 @@ const Index = () => {
             )}
           </div>
         )}
+
+        {/* Features Section */}
+        <div className="space-y-8">
+          <h2 className="text-2xl font-semibold text-center text-gray-800">
+            Key Features
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card className="p-6 bg-white/80 backdrop-blur-sm">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">
+                Sentiment Analysis
+              </h3>
+              <p className="text-gray-600">
+                Our advanced AI model analyzes the emotional tone of your text,
+                providing detailed insights into whether the content is positive or
+                negative, along with confidence scores.
+              </p>
+            </Card>
+            <Card className="p-6 bg-white/80 backdrop-blur-sm">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">
+                Language Translation
+              </h3>
+              <p className="text-gray-600">
+                Translate your text between multiple languages with high accuracy.
+                Currently supporting translations to Spanish and French, with more
+                languages coming soon.
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        {/* How It Works Section */}
+        <div className="space-y-8">
+          <h2 className="text-2xl font-semibold text-center text-gray-800">
+            How It Works
+          </h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card className="p-6 bg-white/80 backdrop-blur-sm">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">1. Input</h3>
+              <p className="text-gray-600">
+                Enter your text in the input field above. The system accepts text in
+                English for both sentiment analysis and translation.
+              </p>
+            </Card>
+            <Card className="p-6 bg-white/80 backdrop-blur-sm">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">
+                2. Process
+              </h3>
+              <p className="text-gray-600">
+                Choose whether to analyze sentiment or translate the text. Our AI
+                models will process your input in real-time.
+              </p>
+            </Card>
+            <Card className="p-6 bg-white/80 backdrop-blur-sm">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">
+                3. Results
+              </h3>
+              <p className="text-gray-600">
+                View the results instantly. Sentiment analysis includes confidence
+                scores, while translations maintain the original meaning.
+              </p>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
